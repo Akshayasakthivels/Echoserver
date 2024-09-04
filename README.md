@@ -20,8 +20,52 @@ Implementation using Python code
 Testing the server and client 
 
 ## PROGRAM:
+Name : Akshaya S
+
+Reg no :212223220006
+
+CLIENT
+```
+import socket
+s = socket.socket()
+s.connect(('localhost', 8000))
+while True:
+    msg = input("client > ")
+    s.send(msg.encode())
+    if msg == 'exit': 
+        print("Closing connection...")
+        break
+    print("server > ", s.recv(1024).decode()) 
+s.close()
+print("Client closed.")
+```
+
+SERVER
+```
+import socket
+s = socket.socket()
+s.bind(('localhost', 8000))
+s.listen(5)
+print("Server is listening...")
+c, addr = s.accept()
+print(f"Connection from {addr} has been established.")
+while True:
+    s_msg = c.recv(1024).decode()
+    if s_msg == 'exit':
+        print("Client requested to close the connection.")
+        break
+    print("client > ", s_msg)
+    c.send(s_msg.encode())
+c.close()
+s.close()
+print("Server closed.")
+
+
+```
 
 ## OUTPUT:
+![Screenshot (51)](https://github.com/user-attachments/assets/8590f95c-f68b-4bd4-a242-052669510884)
+
 
 ## RESULT:
 The program is executed successfully
